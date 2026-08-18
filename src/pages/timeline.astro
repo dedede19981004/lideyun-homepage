@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { timeline } from '../data/timeline';
+import { profile } from '../data/profile';
+---
+<Base title="时间线">
+  <div class="container">
+    <header class="page-head">
+      <h1>时间线</h1>
+      <p class="sub">Timeline — Journey So Far</p>
+    </header>
+
+    <div class="tl">
+      {timeline.map((t) => (
+        <div class="tl-item">
+          <p class="tl-period">{t.period}</p>
+          <h3 class="tl-title">{t.title}</h3>
+          <p class="tl-org">{t.org}</p>
+          {t.desc && <p class="tl-desc">{t.desc}</p>}
+          {t.tags && t.tags.length > 0 && (
+            <div class="tl-tags">
+              {t.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div class="tl-cert">
+      <span class="k">证书 / 语言</span>
+      <span class="v">{profile.certs.join(' · ')}</span>
+    </div>
+
+    <p class="sec-more">
+      <a class="arrow-link" href="/contact">联系我 <span>→</span></a>
+    </p>
+  </div>
+</Base>

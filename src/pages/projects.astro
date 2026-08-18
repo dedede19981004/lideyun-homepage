@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects } from '../data/projects';
+---
+<Base title="项目">
+  <div class="container">
+    <header class="page-head">
+      <h1>项目</h1>
+      <p class="sub">Projects — Selected Work</p>
+    </header>
+
+    <div class="project-list">
+      {projects.map((p, i) => (
+        <article class="project">
+          <div class="project-head">
+            <span class="project-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="project-period">{p.period}</span>
+          </div>
+          <h3 class="project-title">{p.title}</h3>
+          <p class="project-role">{p.role} · Shanghai</p>
+          <p class="project-summary">{p.summary}</p>
+          <ul class="project-points">
+            {p.points.map((pt) => (
+              <li>{pt}</li>
+            ))}
+          </ul>
+          <div class="project-stats">
+            {p.stats.map((s) => (
+              <span class="stat">
+                <b>{s.num}</b>
+                {s.label}
+              </span>
+            ))}
+          </div>
+          <div class="project-tags">
+            {p.tags.map((t) => (
+              <span class="tag">{t}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="sec-more">
+      <a class="arrow-link" href="/timeline">查看时间线 <span>→</span></a>
+    </p>
+  </div>
+</Base>

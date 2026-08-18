@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../lib/utils';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+const featured = projects.slice(0, 3);
+---
+<Base>
+  <section class="hero container">
+    <p class="hero-label">LLM Evaluation · Shanghai</p>
+    <h1 class="hero-name">{profile.nameZh}</h1>
+    <p class="hero-en">{profile.nameEn}</p>
+    <h2 class="hero-title">
+      {profile.title}<span class="en">{profile.titleEn}</span>
+    </h2>
+    <p class="hero-intro">{profile.intro}</p>
+    <div class="hero-actions">
+      <a class="btn" href="/projects">查看项目</a>
+      <a class="btn" href="/contact">联系我</a>
+      <a class="arrow-link" href="/blog">阅读博客 <span>→</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">3+</div>
+        <div class="lab">年 AI 评测工程经验</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">80%</div>
+        <div class="lab">人工操作成本降低</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">T+1</div>
+        <div class="lab">评测结果交付周期</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <SectionLabel index="01" en="Featured Projects" zh="精选项目" />
+    <div class="project-list">
+      {featured.map((p, i) => (
+        <article class="project">
+          <div class="project-head">
+            <span class="project-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="project-period">{p.period}</span>
+          </div>
+          <h3 class="project-title">{p.title}</h3>
+          <p class="project-summary">{p.summary}</p>
+          <div class="project-stats">
+            {p.stats.map((s) => (
+              <span class="stat">
+                <b>{s.num}</b>
+                {s.label}
+              </span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="sec-more">
+      <a class="arrow-link" href="/projects">查看全部项目 <span>→</span></a>
+    </p>
+  </section>
+
+  <section class="container section">
+    <SectionLabel index="02" en="Latest Writing" zh="最新文章" />
+    <div class="post-list">
+      {posts.map((p) => (
+        <a class="post-row" href={`/blog/${p.id}/`}>
+          <span class="post-date">{formatDate(p.data.date)}</span>
+          <div>
+            <h3 class="post-title">{p.data.title}</h3>
+            <p class="post-desc">{p.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <p class="sec-more">
+      <a class="arrow-link" href="/blog">进入博客 <span>→</span></a>
+    </p>
+  </section>
+
+  <section class="invert section-cta">
+    <div class="cta-inner">
+      <h2>把「好不好」变成可度量的答案。</h2>
+      <p>如果你在做大模型或自动驾驶评测，或者只是路过想聊聊，欢迎写信给我。</p>
+      <div class="cta-actions">
+        <a class="btn" href={`mailto:${profile.email}`}>Email Me</a>
+        <a class="btn" href="/contact">更多联系方式</a>
+      </div>
+      <p class="cta-meta">Open to talking · Based in Shanghai</p>
+    </div>
+  </section>
+</Base>

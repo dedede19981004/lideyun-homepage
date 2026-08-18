@@ -1,0 +1,28 @@
+---
+interface Props {
+  index?: string;
+  en: string;
+  zh?: string;
+}
+const { index, en, zh } = Astro.props;
+---
+<div class="sec-label">
+  {index && <span class="sec-num">{index}</span>}
+  <span class="sec-en">{en}</span>
+  {zh && <span class="sec-zh">{zh}</span>}
+</div>
+
+<style>
+  .sec-label {
+    display: flex;
+    align-items: baseline;
+    gap: 1.1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.9rem;
+    margin-bottom: 2.75rem;
+    font-family: var(--mono);
+  }
+  .sec-num { font-size: 12px; letter-spacing: 0.12em; color: var(--ink-soft); }
+  .sec-en { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .sec-zh { margin-left: auto; font-family: var(--sans); font-size: 13px; color: var(--ink-soft); }
+</style>

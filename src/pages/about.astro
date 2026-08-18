@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile } from '../data/profile';
+---
+<Base title="关于">
+  <div class="container">
+    <header class="page-head">
+      <h1>关于我</h1>
+      <p class="sub">About — Who I Am</p>
+    </header>
+
+    <p class="about-intro">
+      我是李德云，一名大模型评测工程师，现居上海。近三年深耕 AI
+      评测体系建设：从视觉语言大模型的评测方案调研与评测集设计，到高自动化评测工程落地、指标体系构建与
+      Badcase 挖掘，完整走通了「从 0 到 1」的评测基建全流程；此前在智能驾驶方向积累了静态 BEV
+      感知模型评测、E2E/VLA 开闭环仿真测试与数据闭环优化的实战经验。
+    </p>
+
+    <div class="about-grid">
+      <div class="about-block">
+        <h2>01 / 专注方向 Focus</h2>
+        <ul class="focus-list">
+          <li>视觉语言大模型（VLM）效果评测：评测方案、评测集、指标、可视化</li>
+          <li>自动驾驶感知评测：静态 BEV 模型、E2E/VLA 仿真、专项场景 VLM</li>
+          <li>评测工程化：自动化流水线、数据闭环、Badcase 挖掘</li>
+        </ul>
+      </div>
+
+      <div class="about-block">
+        <h2>02 / 技术栈 Stack</h2>
+        <div class="skill-chips">
+          {profile.skills.map((s) => (
+            <span class="skill-chip">{s}</span>
+          ))}
+        </div>
+        <p class="plain" style="margin-top: 1.2rem;">
+          证书 / 语言：{profile.certs.join(' · ')}
+        </p>
+      </div>
+
+      <div class="about-block">
+        <h2>03 / 自述 Statement</h2>
+        <p class="about-quote">
+          我信奉方法论先行：评测的本质是先定义清楚「好」的标准，再用工程手段把它稳定地度量出来。工具会变、模型会变，但「可复现、可对比、可追溯」的评测范式不会过时。
+        </p>
+      </div>
+
+      <div class="about-block">
+        <h2>04 / 工作之外 Beyond Work</h2>
+        <p class="plain">兴趣爱好：{profile.hobbies}</p>
+        <p class="plain">活动经历：{profile.activities}</p>
+      </div>
+    </div>
+
+    <p class="sec-more">
+      <a class="arrow-link" href="/timeline">查看完整经历 <span>→</span></a>
+    </p>
+  </div>
+</Base>

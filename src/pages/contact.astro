@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile } from '../data/profile';
+---
+<Base title="联系">
+  <div class="container">
+    <header class="page-head">
+      <h1>联系我</h1>
+      <p class="sub">Contact — Say Hi</p>
+    </header>
+
+    <p class="contact-lead">
+      无论是大模型评测、自动化测试体系的交流，还是合作机会，都欢迎来信。目前在职，收到邮件会尽快回复。
+    </p>
+
+    <div class="contact-list">
+      <div class="contact-row">
+        <span class="k">Email</span>
+        <a class="v" href={`mailto:${profile.email}`}>{profile.email}</a>
+      </div>
+      <div class="contact-row">
+        <span class="k">GitHub</span>
+        <a class="v" href={profile.github} target="_blank" rel="noopener noreferrer">
+          {profile.github.replace('https://', '')}
+        </a>
+      </div>
+      <div class="contact-row">
+        <span class="k">Location</span>
+        <span class="v">{profile.location} · China</span>
+      </div>
+    </div>
+
+    <p class="contact-note">* 为保护隐私，电话 / 微信等联系方式请通过邮件索取。</p>
+  </div>
+</Base>

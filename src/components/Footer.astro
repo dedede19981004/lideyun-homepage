@@ -1,0 +1,51 @@
+---
+import { profile } from '../data/profile';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="name">{profile.nameZh}</p>
+        <p class="sub">{profile.nameEn} — {profile.titleEn}</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="/about">关于</a>
+        <a href="/projects">项目</a>
+        <a href="/blog">博客</a>
+        <a href="/timeline">时间线</a>
+        <a href="/contact">联系</a>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span>© {year} {profile.nameEn} · SHANGHAI</span>
+      <span>Built with Astro · Hosted on GitHub Pages</span>
+      <a href={`mailto:${profile.email}`}>{profile.email}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { margin-top: 6.5rem; background: var(--invert); color: var(--invert-ink); }
+  .footer-inner { max-width: 1080px; margin: 0 auto; padding: 3.75rem var(--pad) 2.5rem; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+  .footer-brand .name { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; }
+  .footer-brand .sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--invert-soft); margin-top: 0.4rem; }
+  .footer-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .footer-nav a:hover { text-decoration: underline; }
+  .footer-meta {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(250, 250, 249, 0.22);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--invert-soft);
+    text-transform: uppercase;
+  }
+  .footer-meta a:hover { text-decoration: underline; color: var(--invert-ink); }
+</style>
