@@ -5,26 +5,28 @@ import { projects } from '../data/projects';
 <Base title="项目">
   <div class="container">
     <header class="page-head">
-      <h1>项目</h1>
-      <p class="sub">Projects — Selected Work</p>
+      <p class="watermark" aria-hidden="true">WORK</p>
+      <p class="kicker" data-reveal>Projects — Selected Work</p>
+      <h1 data-reveal style="--d:0.08s">项目</h1>
+      <p class="lead" data-reveal style="--d:0.16s">五个从 0 到 1 的评测工程实践：模型评测、仿真测试与数据闭环。</p>
     </header>
 
     <div class="project-list">
       {projects.map((p, i) => (
-        <article class="project">
-          <div class="project-head">
-            <span class="project-num">{String(i + 1).padStart(2, '0')}</span>
-            <span class="project-period">{p.period}</span>
+        <article class="proj-row" data-reveal style={`--d:${i * 0.06}s`}>
+          <div class="proj-top">
+            <span class="proj-idx">0{i + 1}</span>
+            <span class="proj-period">{p.period}</span>
           </div>
-          <h3 class="project-title">{p.title}</h3>
-          <p class="project-role">{p.role} · Shanghai</p>
-          <p class="project-summary">{p.summary}</p>
-          <ul class="project-points">
+          <h3 class="proj-title">{p.title}</h3>
+          <p class="proj-role">{p.role} · Shanghai</p>
+          <p class="proj-summary">{p.summary}</p>
+          <ul class="proj-points">
             {p.points.map((pt) => (
               <li>{pt}</li>
             ))}
           </ul>
-          <div class="project-stats">
+          <div class="proj-stats">
             {p.stats.map((s) => (
               <span class="stat">
                 <b>{s.num}</b>
@@ -32,16 +34,17 @@ import { projects } from '../data/projects';
               </span>
             ))}
           </div>
-          <div class="project-tags">
+          <div class="proj-tags">
             {p.tags.map((t) => (
               <span class="tag">{t}</span>
             ))}
           </div>
+          <span class="proj-arrow" aria-hidden="true">↗</span>
         </article>
       ))}
     </div>
 
-    <p class="sec-more">
+    <p class="sec-more" data-reveal>
       <a class="arrow-link" href="/timeline">查看时间线 <span>→</span></a>
     </p>
   </div>

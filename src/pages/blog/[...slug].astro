@@ -25,8 +25,8 @@ const next = idx < all.length - 1 ? all[idx + 1] : null;
   <div class="container">
     <header class="post-head">
       <a class="back" href="/blog">← 全部文章</a>
-      <h1>{post.data.title}</h1>
-      <div class="post-meta">
+      <h1 data-reveal>{post.data.title}</h1>
+      <div class="post-meta" data-reveal style="--d:0.08s">
         <span>{formatDate(post.data.date)}</span>
         <span>{minutes} Min Read</span>
         {post.data.tags.map((t) => (

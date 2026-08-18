@@ -4,9 +4,9 @@ import Base from '../layouts/Base.astro';
 <Base title="404">
   <div class="container">
     <div class="notfound">
-      <p class="code">404 — Page Not Found</p>
-      <h1>这里什么都没有。</h1>
-      <div class="actions">
+      <p class="code" aria-hidden="true" data-reveal>404</p>
+      <h1 data-reveal style="--d:0.08s">这里什么都没有。</h1>
+      <div class="actions" data-reveal style="--d:0.16s">
         <a class="btn" href="/">回到首页</a>
         <a class="btn" href="/blog">去博客看看</a>
       </div>

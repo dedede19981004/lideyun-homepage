@@ -10,13 +10,15 @@ const posts = (await getCollection('blog'))
 <Base title="博客">
   <div class="container">
     <header class="page-head">
-      <h1>博客</h1>
-      <p class="sub">Blog — Notes on AI Evaluation</p>
+      <p class="watermark" aria-hidden="true">NOTES</p>
+      <p class="kicker" data-reveal>Blog — Notes on AI Evaluation</p>
+      <h1 data-reveal style="--d:0.08s">博客</h1>
+      <p class="lead" data-reveal style="--d:0.16s">关于大模型评测、感知评测与仿真测试的实践笔记。</p>
     </header>
 
     <div class="post-list">
-      {posts.map((p) => (
-        <a class="post-row" href={`/blog/${p.id}/`}>
+      {posts.map((p, i) => (
+        <a class="post-row" href={`/blog/${p.id}/`} data-reveal style={`--d:${i * 0.06}s`}>
           <span class="post-date">{formatDate(p.data.date)}</span>
           <div>
             <h3 class="post-title">{p.data.title}</h3>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SectionLabel from '../components/SectionLabel.astro';
+import Asterisk from '../components/Asterisk.astro';
 import { profile } from '../data/profile';
 import { projects } from '../data/projects';
 import { getCollection } from 'astro:content';
@@ -11,49 +12,105 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 const featured = projects.slice(0, 3);
+const marqueeItems = [
+  '视觉语言模型评测',
+  'BEV 感知评测',
+  'E2E / VLA 仿真测试',
+  'OpenCompass',
+  'Badcase 挖掘',
+  '数据闭环',
+  'Metrics 设计',
+  '自动化流水线',
+];
 ---
 <Base>
-  <section class="hero container">
-    <p class="hero-label">LLM Evaluation · Shanghai</p>
-    <h1 class="hero-name">{profile.nameZh}</h1>
-    <p class="hero-en">{profile.nameEn}</p>
-    <h2 class="hero-title">
-      {profile.title}<span class="en">{profile.titleEn}</span>
-    </h2>
-    <p class="hero-intro">{profile.intro}</p>
-    <div class="hero-actions">
-      <a class="btn" href="/projects">查看项目</a>
-      <a class="btn" href="/contact">联系我</a>
-      <a class="arrow-link" href="/blog">阅读博客 <span>→</span></a>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-ast" aria-hidden="true"><Asterisk /></div>
+    <div class="container hero-inner">
+      <p class="hero-label" data-reveal>LLM Evaluation Engineer — Shanghai, China</p>
+      <h1 class="hero-name" data-reveal style="--d:0.08s">{profile.nameZh}</h1>
+      <p class="hero-name-en" aria-hidden="true" data-reveal style="--d:0.16s">LI DEYUN</p>
+      <div class="hero-bottom">
+        <div>
+          <h2 class="hero-title" data-reveal style="--d:0.22s">
+            {profile.title}<span class="en">{profile.titleEn}</span>
+          </h2>
+        </div>
+        <div>
+          <p class="hero-intro" data-reveal style="--d:0.28s">{profile.intro}</p>
+          <div class="hero-actions" data-reveal style="--d:0.34s">
+            <a class="btn btn-light" href="/projects">查看项目</a>
+            <a class="btn btn-light" href="/contact">联系我</a>
+            <a class="arrow-link" href="/blog">阅读博客 <span>→</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-stats" data-reveal style="--d:0.4s">
+        <div class="hero-stat">
+          <div class="num">3+</div>
+          <div class="lab">年 AI 评测工程经验</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">80%</div>
+          <div class="lab">人工操作成本降低</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">T+1</div>
+          <div class="lab">评测结果交付周期</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">10w+</div>
+          <div class="lab">月度数据交付规模</div>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="num">3+</div>
-        <div class="lab">年 AI 评测工程经验</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">80%</div>
-        <div class="lab">人工操作成本降低</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">T+1</div>
-        <div class="lab">评测结果交付周期</div>
-      </div>
+    <div class="container hero-scroll">
+      <span>Scroll</span>
+      <span class="dot"></span>
+      <span>Portfolio · Blog — 2026</span>
     </div>
   </section>
 
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[0, 1].map(() => (
+        <Fragment>
+          {marqueeItems.map((item) => (
+            <Fragment>
+              <span>{item}</span>
+              <i>✦</i>
+            </Fragment>
+          ))}
+        </Fragment>
+      ))}
+    </div>
+  </div>
+
+  <!-- ============ STATEMENT ============ -->
+  <section class="container section">
+    <p class="statement" data-reveal>
+      我是李德云——一名<em>大模型评测工程师</em>。近三年，我专注把「模型好不好」这件事做成可复现、可对比、可追溯的工程体系：从评测方案调研、评测集设计，到自动化流水线、指标体系与
+      Badcase 挖掘，完整走过「从 0 到 1」。
+    </p>
+    <a class="statement from" href="/about" data-reveal>About Me → 了解更多</a>
+  </section>
+
+  <!-- ============ FEATURED PROJECTS ============ -->
   <section class="container section">
     <SectionLabel index="01" en="Featured Projects" zh="精选项目" />
     <div class="project-list">
       {featured.map((p, i) => (
-        <article class="project">
-          <div class="project-head">
-            <span class="project-num">{String(i + 1).padStart(2, '0')}</span>
-            <span class="project-period">{p.period}</span>
+        <a class="proj-row" href="/projects" data-reveal style={`--d:${i * 0.08}s`}>
+          <div class="proj-top">
+            <span class="proj-idx">0{i + 1}</span>
+            <span class="proj-period">{p.period}</span>
           </div>
-          <h3 class="project-title">{p.title}</h3>
-          <p class="project-summary">{p.summary}</p>
-          <div class="project-stats">
+          <h3 class="proj-title">{p.title}</h3>
+          <p class="proj-summary">{p.summary}</p>
+          <div class="proj-stats">
             {p.stats.map((s) => (
               <span class="stat">
                 <b>{s.num}</b>
@@ -61,41 +118,49 @@ const featured = projects.slice(0, 3);
               </span>
             ))}
           </div>
-        </article>
+          <span class="proj-arrow" aria-hidden="true">↗</span>
+        </a>
       ))}
     </div>
-    <p class="sec-more">
+    <p class="sec-more" data-reveal>
       <a class="arrow-link" href="/projects">查看全部项目 <span>→</span></a>
     </p>
   </section>
 
+  <!-- ============ LATEST POSTS ============ -->
   <section class="container section">
     <SectionLabel index="02" en="Latest Writing" zh="最新文章" />
-    <div class="post-list">
-      {posts.map((p) => (
-        <a class="post-row" href={`/blog/${p.id}/`}>
+    <div class="posts-grid">
+      {posts.map((p, i) => (
+        <a class="post-card" href={`/blog/${p.id}/`} data-reveal style={`--d:${i * 0.08}s`}>
           <span class="post-date">{formatDate(p.data.date)}</span>
-          <div>
-            <h3 class="post-title">{p.data.title}</h3>
-            <p class="post-desc">{p.data.description}</p>
-          </div>
+          <h3 class="post-title">{p.data.title}</h3>
+          <p class="post-desc">{p.data.description}</p>
+          <span class="post-more">Read <i>→</i></span>
         </a>
       ))}
     </div>
-    <p class="sec-more">
+    <p class="sec-more" data-reveal>
       <a class="arrow-link" href="/blog">进入博客 <span>→</span></a>
     </p>
   </section>
 
-  <section class="invert section-cta">
+  <!-- ============ CTA ============ -->
+  <section class="cta">
     <div class="cta-inner">
-      <h2>把「好不好」变成可度量的答案。</h2>
-      <p>如果你在做大模型或自动驾驶评测，或者只是路过想聊聊，欢迎写信给我。</p>
-      <div class="cta-actions">
-        <a class="btn" href={`mailto:${profile.email}`}>Email Me</a>
-        <a class="btn" href="/contact">更多联系方式</a>
+      <div class="cta-ast" aria-hidden="true"><Asterisk /></div>
+      <p class="cta-label" data-reveal>Got a project? Let's talk</p>
+      <h2 class="cta-title" data-reveal style="--d:0.08s">
+        把「好不好」<br />变成可度量的答案。
+      </h2>
+      <a class="cta-mail" href={`mailto:${profile.email}`} data-reveal style="--d:0.16s">
+        {profile.email}
+      </a>
+      <div class="cta-actions" data-reveal style="--d:0.22s">
+        <a class="btn btn-light" href="/contact">更多联系方式</a>
+        <a class="btn btn-light" href="/projects">看看我做过什么</a>
       </div>
-      <p class="cta-meta">Open to talking · Based in Shanghai</p>
+      <p class="cta-meta" data-reveal style="--d:0.28s">Open to Talking · Based in Shanghai</p>
     </div>
   </section>
 </Base>

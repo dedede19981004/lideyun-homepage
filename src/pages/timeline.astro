@@ -6,34 +6,38 @@ import { profile } from '../data/profile';
 <Base title="时间线">
   <div class="container">
     <header class="page-head">
-      <h1>时间线</h1>
-      <p class="sub">Timeline — Journey So Far</p>
+      <p class="watermark" aria-hidden="true">JOURNEY</p>
+      <p class="kicker" data-reveal>Timeline — Journey So Far</p>
+      <h1 data-reveal style="--d:0.08s">时间线</h1>
+      <p class="lead" data-reveal style="--d:0.16s">从校园到智能驾驶，再到视觉语言大模型评测——一条不断「度量世界」的路。</p>
     </header>
 
     <div class="tl">
-      {timeline.map((t) => (
-        <div class="tl-item">
+      {timeline.map((t, i) => (
+        <div class="tl-item" data-reveal style={`--d:${i * 0.06}s`}>
           <p class="tl-period">{t.period}</p>
-          <h3 class="tl-title">{t.title}</h3>
-          <p class="tl-org">{t.org}</p>
-          {t.desc && <p class="tl-desc">{t.desc}</p>}
-          {t.tags && t.tags.length > 0 && (
-            <div class="tl-tags">
-              {t.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          )}
+          <div>
+            <h3 class="tl-title">{t.title}</h3>
+            <p class="tl-org">{t.org}</p>
+            {t.desc && <p class="tl-desc">{t.desc}</p>}
+            {t.tags && t.tags.length > 0 && (
+              <div class="tl-tags">
+                {t.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </div>
 
-    <div class="tl-cert">
+    <div class="tl-cert" data-reveal>
       <span class="k">证书 / 语言</span>
       <span class="v">{profile.certs.join(' · ')}</span>
     </div>
 
-    <p class="sec-more">
+    <p class="sec-more" data-reveal>
       <a class="arrow-link" href="/contact">联系我 <span>→</span></a>
     </p>
   </div>
