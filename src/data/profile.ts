@@ -8,8 +8,7 @@ export const profile = {
   titleEn: 'LLM EVALUATION ENGINEER',
   location: '上海',
   email: 'lideyun98@163.com',
-  // TODO: 替换为你的 GitHub 主页地址
-  github: 'https://github.com/your-github-username',
+  github: 'https://github.com/dedede19981004',
   intro:
     '专注视觉语言大模型评测与自动驾驶感知评测体系构建。从评测方案设计、评测集构建，到自动化评测工程落地与指标体系设计，完整经历「从 0 到 1」的评测基建全过程。',
   skills: [
